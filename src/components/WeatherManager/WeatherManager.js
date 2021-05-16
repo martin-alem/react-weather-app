@@ -1,7 +1,7 @@
 import React from 'react';
 import "./WeatherManager.css";
 import "./background-image.jpg";
-import { makeRequest } from "./utils";
+import { getWeatherDataOnPageLoad } from "./utils";
 import SearchForm from '../forms/SearchForm';
 import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
@@ -21,18 +21,22 @@ class WeatherManager extends React.Component {
     }
 
     componentDidMount() {
-        makeRequest("Columbus").then(response => {
+        getWeatherDataOnPageLoad().then(response => {
             this.setState({ doneFetching: true, weatherData: response });
+        }).catch(error => {
+            this.setState({ doneFetching: true });
+            //show error message
+            console.error("Error loading weather data" + error);
         });
     }
 
     render() {
-
+        console.log(this.state.weatherData);
         //build location toString
-        const location = `${this.state.weatherData.city}, ${this.state.weatherData.country}`
+        const location = `${this.state.weatherData.city ? this.state.weatherData.city : "No City"}, ${this.state.weatherData.country ? this.state.weatherData.country : "No Country"}`
 
         //build image start_url
-        const imageUrl = `https://openweathermap.org/img/wn/${this.state.weatherData.icon}@2x.png`;
+        const imageUrl = `https://openweathermap.org/img/wn/${this.state.weatherData.icon ? this.state.weatherData.icon : "01d"}@2x.png`;
 
         return (
             <React.Fragment>

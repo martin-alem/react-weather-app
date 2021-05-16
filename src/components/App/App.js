@@ -1,5 +1,5 @@
 import './App.css';
-import DefaultButton from '../Temperature/Temperature';
+import DefaultButton from '../WeatherManager/WeatherManager';
 
 function App() {
   return (

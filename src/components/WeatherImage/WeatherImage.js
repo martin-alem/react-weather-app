@@ -1,11 +1,12 @@
 import React from 'react';
+import "./default-weather.png";
 import "./WeatherImage.css"
 
 class WeatherImage extends React.Component {
 
     static defaultProps = {
         imageSrc: "./default-weather.png",
-        description: "No Weather Data"
+        description: "No Weather Description"
     }
 
     render() {

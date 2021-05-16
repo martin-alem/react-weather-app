@@ -1,3 +1,7 @@
+.SearchForm{
+    display: flex;
+}
+
 .SearchForm-input {
     width: 100%;
     padding: 1rem;

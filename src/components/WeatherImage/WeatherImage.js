@@ -11,11 +11,12 @@ class WeatherImage extends React.Component {
     }
 
     render() {
+
         return (
             <React.Fragment>
                 <div className="WeatherImage">
                     <img className="WeatherImage-image" src={this.props.imageSrc} alt="Weather" />
-                    {/* <p className="Weather-description">{this.props.description}</p> */}
+                    <p className="Weather-description">{this.props.description}</p>
                 </div>
             </React.Fragment>
         );

@@ -10,11 +10,14 @@ class SearchForm extends React.Component {
         }
     }
 
+    handleChange(event) {
+        this.setState({ searchWord: event.target.value })
+    }
     render() {
         return (
             <React.Fragment>
                 <form className="SearchForm">
-                    <input type="search" className="SearchForm-input" name="search" placeholder="Enter Location" value={this.state.searchWord} />
+                    <input type="search" className="SearchForm-input" name="search" placeholder="Enter Location" value={this.state.searchWord} onChange={this.handleChange} />
                     <SearchButton />
                 </form>
             </React.Fragment>

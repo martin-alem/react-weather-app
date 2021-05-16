@@ -7,7 +7,7 @@ class LocationButton extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <button className="Button Button-round"><i class="fas fa-save"></i></button>
+                <button className="Button Button-round"><i className="fas fa-save"></i></button>
             </React.Fragment>
         );
     }

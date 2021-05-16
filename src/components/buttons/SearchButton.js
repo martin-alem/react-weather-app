@@ -4,7 +4,6 @@ import "./Button.css";
 
 class SearchButton extends React.Component {
 
-
     render() {
         return (
             <React.Fragment>

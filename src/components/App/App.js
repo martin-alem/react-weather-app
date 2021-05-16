@@ -1,11 +1,10 @@
 import './App.css';
-import SearchForm from '../forms/SearchForm';
-import SearchButton from '../buttons/SearchButton';
+import DefaultButton from '../buttons/SaveButton';
 
 function App() {
   return (
     <div className="App">
-      <SearchButton />
+      <DefaultButton />
     </div>
   );
 }

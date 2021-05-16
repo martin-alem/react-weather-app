@@ -18,3 +18,14 @@ Button:hover {
     color: #383A3F;
     border-radius: 0px 5rem 5rem 0px;
 }
+
+.Button-round {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    outline: none;
+  }
+
+.fas{
+    font-size: 2.5rem ;
+}

@@ -1,4 +1,8 @@
 .Weather-description{
     font-size: 2.5rem;
-    margin-top: -1rem;
+    color: #ffff;
+}
+
+.WeatherImage-image{
+    width: 400px;
 }

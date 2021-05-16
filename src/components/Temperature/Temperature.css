@@ -1,7 +1,7 @@
 .Temperature-value{
     position: relative;
     font-size: 30rem;
-    /* color: #ffff; */
+    color: #ffff;
 }
 
 .Temperature-unit{
@@ -17,4 +17,5 @@
     font-weight: bold;
     margin-left: -10rem;
     margin-top: -5rem;
+    color: #ffff;
 }

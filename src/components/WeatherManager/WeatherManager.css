@@ -35,3 +35,21 @@
 .save-btn{
     grid-area:sbtn;
 }
+
+.WeatherManager-info{
+    margin-top: 5rem;
+    display:grid;
+    grid-template-columns: repeat(12, auto);
+    justify-content:center;
+    align-items:center;
+    grid-template-areas: 
+    "Img Img Img Img Img Img Tmp Tmp Tmp Tmp Tmp Tmp";
+    column-gap: 8rem;
+}
+
+.temperature{
+    grid-area: Tmp;
+}
+.weather-image{
+    grid-area: Img;
+}

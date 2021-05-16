@@ -6,6 +6,8 @@ import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
 import BookMarkButton from '../buttons/BookMarkButton';
 import SaveButton from '../buttons/SaveButton';
+import WeatherImage from "../WeatherImage/WeatherImage";
+import Temperature from "../Temperature/Temperature";
 
 class WeatherManager extends React.Component {
     constructor(props) {
@@ -32,15 +34,22 @@ class WeatherManager extends React.Component {
                             <BookMarkButton />
                         </div>
 
-
                         <div className="save-btn">
                             <SaveButton />
                         </div>
 
                     </div>
+                    <div className="WeatherManager-info">
+                        <div className="temperature">
+                            <Temperature />
+                        </div>
+                        <div className="weather-image">
+                            <WeatherImage />
+                        </div>
+                    </div>
                 </div>
             </React.Fragment>
-        )
+        );
     }
 }
 

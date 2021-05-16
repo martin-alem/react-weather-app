@@ -5,3 +5,33 @@
     background-repeat:no-repeat;
     margin: 2rem auto;
 }
+
+.WeatherManager-controls{
+    padding-top: 2.4rem;
+    display:grid;
+    grid-template-columns: repeat(12, auto);
+    grid-template-areas: 
+    "dbtn lbtn sform sform sform sform sform sform sform sform bbtn sbtn";
+    column-gap: .5rem;
+}
+
+.WeatherManager .WeatherManager-controls .search-form{
+    display:hidden;
+    grid-area: sform;
+}
+
+.default-btn{
+    grid-area: dbtn;
+}
+
+.location-btn{
+    grid-area: lbtn;
+}
+
+.bookmark-btn{
+    grid-area: bbtn;
+}
+
+.save-btn{
+    grid-area:sbtn;
+}

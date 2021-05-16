@@ -11,3 +11,10 @@
     top: -22rem;
     left: -10rem;
 }
+
+.Temperature-location{
+    font-size: 4rem;
+    font-weight: bold;
+    margin-left: -10rem;
+    margin-top: -5rem;
+}

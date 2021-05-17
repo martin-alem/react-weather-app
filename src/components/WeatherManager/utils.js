@@ -79,6 +79,15 @@ async function getWeatherDataOnPageLoad() {
 
 }
 
+async function getWeatherDataOnSubmit(cityName) {
+
+    try {
+        return makeRequest({ type: "cityName", cityName: cityName });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 function getCurrentLocation() {
 
     return new Promise((resolve, reject) => {
@@ -106,6 +115,6 @@ function toFarenhiet(celsius) {
     return (celsius * (9 / 5)) + 32;
 }
 
-export { getWeatherDataOnPageLoad }
+export { getWeatherDataOnPageLoad, getWeatherDataOnSubmit }
 
 

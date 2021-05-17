@@ -1,7 +1,7 @@
 import React from 'react';
 import "./WeatherManager.css";
 import "./background-image.jpg";
-import { getWeatherDataOnPageLoad } from "./utils";
+import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit } from "./utils";
 import SearchForm from '../forms/SearchForm';
 import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
@@ -18,6 +18,7 @@ class WeatherManager extends React.Component {
             doneFetching: false,
             weatherData: {}
         }
+        this.fetchDataOnSubmit = this.fetchDataOnSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -26,12 +27,20 @@ class WeatherManager extends React.Component {
         }).catch(error => {
             this.setState({ doneFetching: true });
             //show error message
-            console.error("Error loading weather data" + error);
+            console.error("Error loading weather data " + error);
+        });
+    }
+
+    fetchDataOnSubmit(cityName) {
+        getWeatherDataOnSubmit(cityName).then(response => {
+            this.setState({ doneFetching: true, weatherData: response });
+        }).catch(error => {
+            //show error message
+            console.log("Error loading weather data " + error);
         });
     }
 
     render() {
-        console.log(this.state.weatherData);
         //build location toString
         const location = `${this.state.weatherData.city ? this.state.weatherData.city : "No City"}, ${this.state.weatherData.country ? this.state.weatherData.country : "No Country"}`
 
@@ -43,7 +52,7 @@ class WeatherManager extends React.Component {
                 <div className="WeatherManager">
                     <div className="WeatherManager-controls">
                         <div className="search-form">
-                            <SearchForm />
+                            <SearchForm getWeatherDataOnSubmit={this.fetchDataOnSubmit} />
                         </div>
                         <div className="default-btn">
                             <DefaultButton className="default-btn" />

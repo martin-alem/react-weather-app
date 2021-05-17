@@ -41,7 +41,7 @@
     margin-top: 5rem;
     display:grid;
     grid-template-columns: repeat(12, auto);
-    justify-content:center;
+    justify-content:space-between;
     align-items:center;
     grid-template-areas: 
     "Img Img Img Img Img Img Tmp Tmp Tmp Tmp Tmp Tmp";

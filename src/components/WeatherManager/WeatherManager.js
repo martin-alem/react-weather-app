@@ -14,6 +14,7 @@ import BookMarkButton from '../buttons/BookMarkButton';
 import SaveButton from '../buttons/SaveButton';
 import WeatherImage from "../WeatherImage/WeatherImage";
 import Temperature from "../Temperature/Temperature";
+import Modal from "../Modal/Modal";
 import Message from "../Message/Message";
 
 class WeatherManager extends React.Component {
@@ -34,6 +35,7 @@ class WeatherManager extends React.Component {
         getWeatherDataOnPageLoad().then(response => {
             this.setState({ doneFetching: true, weatherData: response });
         }).catch(error => {
+            this.setState({ doneFetching: true });
             //show error message
             console.error("Error loading weather data " + error);
             this.hideShowMessage(4000, "Error loading weather data");
@@ -45,6 +47,7 @@ class WeatherManager extends React.Component {
             this.setState({ doneFetching: true, weatherData: response });
         }).catch(error => {
             //show error message
+            this.setState({ doneFetching: true });
             console.log("Error loading weather data " + error);
             this.hideShowMessage(4000, "Error loading weather data");
         });
@@ -60,6 +63,7 @@ class WeatherManager extends React.Component {
             this.setState({ doneFetching: true, weatherData: response });
         }).catch(error => {
             //show error message
+            this.setState({ doneFetching: true });
             console.log("Error loading weather data " + error);
             this.hideShowMessage(4000, "Error loading weather data");
         });
@@ -81,6 +85,7 @@ class WeatherManager extends React.Component {
 
         return (
             <React.Fragment>
+                <Modal />
                 <div className="WeatherManager">
                     <div className="WeatherManager-controls">
                         <div className="search-form">

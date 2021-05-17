@@ -1,7 +1,12 @@
 import React from 'react';
 import "./WeatherManager.css";
 import "./background-image.jpg";
-import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation } from "./utils";
+import {
+    getWeatherDataOnPageLoad,
+    getWeatherDataOnSubmit,
+    persistLocation,
+    getWeatherDataForCurrentLocation
+} from "./utils";
 import SearchForm from '../forms/SearchForm';
 import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
@@ -21,6 +26,7 @@ class WeatherManager extends React.Component {
             message: ""
         }
         this.fetchDataOnSubmit = this.fetchDataOnSubmit.bind(this);
+        this.fetchWeatherDataForCurrentLocation = this.fetchWeatherDataForCurrentLocation.bind(this);
         this.persistCurrentLocation = this.persistCurrentLocation.bind(this);
     }
 
@@ -28,7 +34,6 @@ class WeatherManager extends React.Component {
         getWeatherDataOnPageLoad().then(response => {
             this.setState({ doneFetching: true, weatherData: response });
         }).catch(error => {
-            this.setState({ doneFetching: true });
             //show error message
             console.error("Error loading weather data " + error);
             this.hideShowMessage(4000, "Error loading weather data");
@@ -48,6 +53,16 @@ class WeatherManager extends React.Component {
     persistCurrentLocation() {
         persistLocation([this.state.weatherData.coords.lat, this.state.weatherData.coords.lon]);
         this.hideShowMessage(3000, "Location Set As Default");
+    }
+
+    fetchWeatherDataForCurrentLocation() {
+        getWeatherDataForCurrentLocation().then(response => {
+            this.setState({ doneFetching: true, weatherData: response });
+        }).catch(error => {
+            //show error message
+            console.log("Error loading weather data " + error);
+            this.hideShowMessage(4000, "Error loading weather data");
+        });
     }
 
     hideShowMessage(duration, message) {
@@ -76,7 +91,7 @@ class WeatherManager extends React.Component {
                         </div>
 
                         <div className="location-btn">
-                            <LocationButton className="location-btn" />
+                            <LocationButton currentLocationData={this.fetchWeatherDataForCurrentLocation} />
                         </div>
 
                         <div className="bookmark-btn">

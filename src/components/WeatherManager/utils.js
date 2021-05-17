@@ -88,6 +88,18 @@ async function getWeatherDataOnSubmit(cityName) {
     }
 }
 
+async function getWeatherDataForCurrentLocation() {
+
+    try {
+        const currentLocation = await getCurrentLocation();
+        const latitude = currentLocation[0];
+        const longitude = currentLocation[1];
+        return makeRequest({ type: "coord", lat: latitude, lon: longitude });
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 function getCurrentLocation() {
 
     return new Promise((resolve, reject) => {
@@ -115,6 +127,11 @@ function toFarenhiet(celsius) {
     return (celsius * (9 / 5)) + 32;
 }
 
-export { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation }
+export {
+    getWeatherDataOnPageLoad,
+    getWeatherDataOnSubmit,
+    persistLocation,
+    getWeatherDataForCurrentLocation
+}
 
 

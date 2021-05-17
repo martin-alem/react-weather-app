@@ -4,6 +4,7 @@
     background-image: url("./background-image.jpg");
     background-repeat:no-repeat;
     margin: 2rem auto;
+    position: relative;
 }
 
 .WeatherManager-controls{
@@ -80,4 +81,13 @@
     100%{
         opacity: 0.1;
     }
+}
+
+.hidden{
+    display: none;
+}
+
+.Message{
+   position: relative;
+   top: 4rem;
 }

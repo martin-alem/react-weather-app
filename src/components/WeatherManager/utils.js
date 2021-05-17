@@ -115,6 +115,6 @@ function toFarenhiet(celsius) {
     return (celsius * (9 / 5)) + 32;
 }
 
-export { getWeatherDataOnPageLoad, getWeatherDataOnSubmit }
+export { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation }
 
 

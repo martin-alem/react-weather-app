@@ -25,7 +25,7 @@ class Modal extends React.Component {
                     {
                         this.props.locations.map((location, index) => {
                             return (
-                                <Card key={index} location={location.location} date={location.date} getWeatherData={this.props.getWeatherData} closeModal={this.handleCloseModal} />
+                                <Card key={index} location={location.location} date={location.date} getWeatherData={this.props.getWeatherData} closeModal={this.handleCloseModal} deleteLocation={this.props.deleteLocation} />
                             );
                         })
                     }

@@ -151,7 +151,23 @@ function retrieveLocations() {
         }
         return customizedLocation;
     } else {
-        throw new Error("Error retrieving locations");
+        throw new Error("No locations Found");
+    }
+}
+
+function deleteLocation(cityName) {
+
+    try {
+
+        const newLocation = retrieveLocations().filter(value => (value.location).toLocaleLowerCase() !== cityName.toLocaleLowerCase());
+        const dataTobeSaved = [];
+        for (let value of newLocation) {
+            dataTobeSaved.push(value.location, value.date);
+        }
+        window.localStorage.setItem("locations", dataTobeSaved);
+        return newLocation;
+    } catch (error) {
+        throw new Error("Could not delete location");
     }
 }
 
@@ -170,7 +186,8 @@ export {
     persistLocation,
     getWeatherDataForCurrentLocation,
     saveLocation,
-    retrieveLocations
+    retrieveLocations,
+    deleteLocation
 }
 
 

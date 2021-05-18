@@ -1,7 +1,7 @@
 import React from 'react';
 import "./WeatherManager.css";
 import "./background-image.jpg";
-import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation, getWeatherDataForCurrentLocation, saveLocation, retrieveLocations } from "./utils";
+import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation, getWeatherDataForCurrentLocation, saveLocation, retrieveLocations, deleteLocation } from "./utils";
 import SearchForm from '../forms/SearchForm';
 import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
@@ -27,6 +27,7 @@ class WeatherManager extends React.Component {
         this.fetchWeatherDataForCurrentLocation = this.fetchWeatherDataForCurrentLocation.bind(this);
         this.persistCurrentLocation = this.persistCurrentLocation.bind(this);
         this.saveCurrentLocation = this.saveCurrentLocation.bind(this);
+        this.deleteLocation = this.deleteLocation.bind(this);
         this.showModal = this.showModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
@@ -87,6 +88,15 @@ class WeatherManager extends React.Component {
         }
     }
 
+    deleteLocation(city) {
+        try {
+            const newLocation = deleteLocation(city);
+            this.setState({ locations: newLocation });
+        } catch (error) {
+            this.hideShowMessage(3000, error.message);
+        }
+    }
+
     hideShowMessage(duration, message) {
         this.setState({ message: message });
         setTimeout(() => {
@@ -117,7 +127,7 @@ class WeatherManager extends React.Component {
 
         return (
             <React.Fragment>
-                <Modal openModal={this.state.openModal} closeModal={this.closeModal} locations={this.state.locations} getWeatherData={this.fetchDataOnSubmit} />
+                <Modal openModal={this.state.openModal} closeModal={this.closeModal} locations={this.state.locations} getWeatherData={this.fetchDataOnSubmit} deleteLocation={this.deleteLocation} />
                 <div className="WeatherManager">
                     <div className="WeatherManager-controls">
                         <div className="search-form">

@@ -8,11 +8,18 @@ class Modal extends React.Component {
         this.state = {
             locations: [{ "location": "Buea", "date": "2015-3-9" }, { "location": "Buea", "date": "2015-3-9" },],
         }
+
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
+
+    handleCloseModal() {
+        this.props.closeModal();
+    }
+
     render() {
         return (
             <React.Fragment>
-                <div className="Modal">
+                <div className={!this.props.openModal ? "Modal hidden" : "Modal"}>
                     <h1>Locations</h1>
                     {
                         this.state.locations.map((location, index) => {
@@ -25,7 +32,8 @@ class Modal extends React.Component {
                         })
                     }
                 </div>
-                <div className="Modal-overlay"></div>
+                <span className={!this.props.openModal ? "close hidden" : "close"}><i onClick={this.handleCloseModal} className="fas fa-times"></i></span>
+                <div className={!this.props.openModal ? "Modal-overlay hidden" : "Modal-overlay"}></div>
             </React.Fragment>
         )
     }

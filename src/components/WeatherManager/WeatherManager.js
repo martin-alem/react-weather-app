@@ -1,12 +1,7 @@
 import React from 'react';
 import "./WeatherManager.css";
 import "./background-image.jpg";
-import {
-    getWeatherDataOnPageLoad,
-    getWeatherDataOnSubmit,
-    persistLocation,
-    getWeatherDataForCurrentLocation
-} from "./utils";
+import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation, getWeatherDataForCurrentLocation } from "./utils";
 import SearchForm from '../forms/SearchForm';
 import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
@@ -24,11 +19,14 @@ class WeatherManager extends React.Component {
         this.state = {
             doneFetching: false,
             weatherData: {},
-            message: ""
+            message: "",
+            openModal: false,
         }
         this.fetchDataOnSubmit = this.fetchDataOnSubmit.bind(this);
         this.fetchWeatherDataForCurrentLocation = this.fetchWeatherDataForCurrentLocation.bind(this);
         this.persistCurrentLocation = this.persistCurrentLocation.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
@@ -76,6 +74,14 @@ class WeatherManager extends React.Component {
         }, duration)
     }
 
+    showModal() {
+        this.setState({ openModal: true });
+    }
+
+    closeModal() {
+        this.setState({ openModal: false });
+    }
+
     render() {
         //build location toString
         const location = `${this.state.weatherData.city ? this.state.weatherData.city : "No City"}, ${this.state.weatherData.country ? this.state.weatherData.country : "No Country"}`
@@ -85,7 +91,7 @@ class WeatherManager extends React.Component {
 
         return (
             <React.Fragment>
-                <Modal />
+                <Modal openModal={this.state.openModal} closeModal={this.closeModal} />
                 <div className="WeatherManager">
                     <div className="WeatherManager-controls">
                         <div className="search-form">
@@ -100,7 +106,7 @@ class WeatherManager extends React.Component {
                         </div>
 
                         <div className="bookmark-btn">
-                            <BookMarkButton />
+                            <BookMarkButton showModal={this.showModal} />
                         </div>
 
                         <div className="save-btn">
@@ -112,19 +118,10 @@ class WeatherManager extends React.Component {
                         <Message message={this.state.message} />
                     </div>
                     <div className="WeatherManager-info">
-                        <div className=
-                            {
-                                this.state.doneFetching ? "temperature" : "temperature animate"
-                            }>
-                            <Temperature
-                                temperatureValue={this.state.weatherData.temperature}
-                                location={location}
-                            />
+                        <div className={this.state.doneFetching ? "temperature" : "temperature animate"}>
+                            <Temperature temperatureValue={this.state.weatherData.temperature} location={location} />
                         </div>
-                        <div className=
-                            {
-                                this.state.doneFetching ? "weather-image" : "weather-image animate"
-                            }>
+                        <div className={this.state.doneFetching ? "weather-image" : "weather-image animate"}>
                             <WeatherImage imageSrc={imageUrl} description={this.state.weatherData.description} />
                         </div>
                     </div>

@@ -5,11 +5,12 @@ import Card from "../Card/Card";
 class Modal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            locations: [{ "location": "Buea", "date": "2015-3-9" }, { "location": "Buea", "date": "2015-3-9" },],
-        }
-
         this.handleCloseModal = this.handleCloseModal.bind(this);
+
+    }
+
+    static defaultProps = {
+        locations: []
     }
 
     handleCloseModal() {
@@ -22,12 +23,9 @@ class Modal extends React.Component {
                 <div className={!this.props.openModal ? "Modal hidden" : "Modal"}>
                     <h1>Locations</h1>
                     {
-                        this.state.locations.map((location, index) => {
+                        this.props.locations.map((location, index) => {
                             return (
-                                <Card
-                                    key={index}
-                                    location={location.location} date={location.date}
-                                />
+                                <Card key={index} location={location.location} date={location.date} getWeatherData={this.props.getWeatherData} closeModal={this.handleCloseModal} />
                             );
                         })
                     }

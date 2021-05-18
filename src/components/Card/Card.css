@@ -6,5 +6,19 @@
     padding: 2rem;
     text-align:left;
     border-radius: 7px;
+}
+
+.actions{
+    display:flex;
+    justify-content: flex-end;
+}
+
+.fa-trash-alt{
+    margin-right: 1.5rem;
+}
+
+.fa-trash-alt, .fa-search-location{
     cursor: pointer;
+    margin-top: 2rem;
+    font-size: 2rem;
 }

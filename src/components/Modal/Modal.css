@@ -28,6 +28,7 @@
 }
 
 .Modal{
+    overflow-y: scroll;
     background-color: #ffff;
     position: absolute;
     padding: 2rem;

@@ -140,6 +140,21 @@ function saveLocation(location) {
     }
 }
 
+function retrieveLocations() {
+
+    const locations = window.localStorage.getItem("locations");
+    if (locations) {
+        let customizedLocation = [];
+        const saveLocations = localStorage.getItem("locations").split(",");
+        for (let i = 0; i < saveLocations.length; i += 2) {
+            customizedLocation.push({ "location": saveLocations[i], "date": saveLocations[i + 1] });
+        }
+        return customizedLocation;
+    } else {
+        throw new Error("Error retrieving locations");
+    }
+}
+
 function toNDecimalPlaces(number, decimalPlaces) {
     const tmpNum = Number.parseInt(number * decimalPlaces);
     return tmpNum / decimalPlaces;
@@ -154,7 +169,8 @@ export {
     getWeatherDataOnSubmit,
     persistLocation,
     getWeatherDataForCurrentLocation,
-    saveLocation
+    saveLocation,
+    retrieveLocations
 }
 
 

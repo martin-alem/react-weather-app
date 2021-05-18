@@ -1,7 +1,7 @@
 import React from 'react';
 import "./WeatherManager.css";
 import "./background-image.jpg";
-import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation, getWeatherDataForCurrentLocation, saveLocation } from "./utils";
+import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation, getWeatherDataForCurrentLocation, saveLocation, retrieveLocations } from "./utils";
 import SearchForm from '../forms/SearchForm';
 import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
@@ -21,6 +21,7 @@ class WeatherManager extends React.Component {
             weatherData: {},
             message: "",
             openModal: false,
+            locations: [],
         }
         this.fetchDataOnSubmit = this.fetchDataOnSubmit.bind(this);
         this.fetchWeatherDataForCurrentLocation = this.fetchWeatherDataForCurrentLocation.bind(this);
@@ -73,10 +74,16 @@ class WeatherManager extends React.Component {
     }
 
     saveCurrentLocation() {
-        try {
-            saveLocation(this.state.weatherData.city);
-        } catch (error) {
-            this.hideShowMessage(3000, error.message);
+
+        if (this.state.weatherData.city) {
+            try {
+                saveLocation(this.state.weatherData.city);
+                this.hideShowMessage(3000, `${this.state.weatherData.city} saved`);
+            } catch (error) {
+                this.hideShowMessage(3000, error.message);
+            }
+        } else {
+            this.hideShowMessage(3000, "Error Saving Location");
         }
     }
 
@@ -88,7 +95,13 @@ class WeatherManager extends React.Component {
     }
 
     showModal() {
-        this.setState({ openModal: true });
+        try {
+            const retrievedLocations = retrieveLocations();
+            this.setState({ locations: retrievedLocations });
+            this.setState({ openModal: true });
+        } catch (error) {
+            this.hideShowMessage(3000, error.message);
+        }
     }
 
     closeModal() {
@@ -104,7 +117,7 @@ class WeatherManager extends React.Component {
 
         return (
             <React.Fragment>
-                <Modal openModal={this.state.openModal} closeModal={this.closeModal} />
+                <Modal openModal={this.state.openModal} closeModal={this.closeModal} locations={this.state.locations} getWeatherData={this.fetchDataOnSubmit} />
                 <div className="WeatherManager">
                     <div className="WeatherManager-controls">
                         <div className="search-form">

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./WeatherManager.css";
 import "./background-image.jpg";
-import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation, getWeatherDataForCurrentLocation } from "./utils";
+import { getWeatherDataOnPageLoad, getWeatherDataOnSubmit, persistLocation, getWeatherDataForCurrentLocation, saveLocation } from "./utils";
 import SearchForm from '../forms/SearchForm';
 import DefaultButton from '../buttons/DefaultButton';
 import LocationButton from '../buttons/LocationButton';
@@ -25,6 +25,7 @@ class WeatherManager extends React.Component {
         this.fetchDataOnSubmit = this.fetchDataOnSubmit.bind(this);
         this.fetchWeatherDataForCurrentLocation = this.fetchWeatherDataForCurrentLocation.bind(this);
         this.persistCurrentLocation = this.persistCurrentLocation.bind(this);
+        this.saveCurrentLocation = this.saveCurrentLocation.bind(this);
         this.showModal = this.showModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
@@ -52,8 +53,12 @@ class WeatherManager extends React.Component {
     }
 
     persistCurrentLocation() {
-        persistLocation([this.state.weatherData.coords.lat, this.state.weatherData.coords.lon]);
-        this.hideShowMessage(3000, "Location Set As Default");
+        if (this.state.weatherData.coords) {
+            persistLocation([this.state.weatherData.coords.lat, this.state.weatherData.coords.lon]);
+            this.hideShowMessage(3000, "Location Set As Default");
+        } else {
+            this.hideShowMessage(3000, "Error Setting Location As Default");
+        }
     }
 
     fetchWeatherDataForCurrentLocation() {
@@ -65,6 +70,14 @@ class WeatherManager extends React.Component {
             console.log("Error loading weather data " + error);
             this.hideShowMessage(4000, "Error loading weather data");
         });
+    }
+
+    saveCurrentLocation() {
+        try {
+            saveLocation(this.state.weatherData.city);
+        } catch (error) {
+            this.hideShowMessage(3000, error.message);
+        }
     }
 
     hideShowMessage(duration, message) {
@@ -110,7 +123,7 @@ class WeatherManager extends React.Component {
                         </div>
 
                         <div className="save-btn">
-                            <SaveButton />
+                            <SaveButton saveLocation={this.saveCurrentLocation} />
                         </div>
 
                     </div>

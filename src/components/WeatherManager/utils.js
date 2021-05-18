@@ -118,6 +118,28 @@ function persistLocation(location) {
     window.localStorage.setItem("default_location", location.toString());
 }
 
+function saveLocation(location) {
+    const saveLocations = window.localStorage.getItem("locations");
+
+    if (saveLocations) {
+        const locations = saveLocations.split(",");
+        // this loops runs in O(n/2) time because we increment by 2
+        //binary search can be used to improve performance
+        for (let i = 0; i < locations.length; i += 2) {
+            if (locations[i] === location) {
+                throw new Error("Location Already Exist");
+            }
+        }
+
+        // save location to localStorage
+        locations.push(location, new Date());
+        window.localStorage.setItem("locations", locations);
+    } else {
+        // if saving for the first time 
+        window.localStorage.setItem("locations", [location, new Date()]);
+    }
+}
+
 function toNDecimalPlaces(number, decimalPlaces) {
     const tmpNum = Number.parseInt(number * decimalPlaces);
     return tmpNum / decimalPlaces;
@@ -131,7 +153,8 @@ export {
     getWeatherDataOnPageLoad,
     getWeatherDataOnSubmit,
     persistLocation,
-    getWeatherDataForCurrentLocation
+    getWeatherDataForCurrentLocation,
+    saveLocation
 }
 
 

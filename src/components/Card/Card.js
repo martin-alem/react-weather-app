@@ -3,7 +3,7 @@ import "./Card.css";
 
 class Card extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     static defaultProps = {

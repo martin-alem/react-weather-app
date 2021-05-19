@@ -1,11 +1,11 @@
 .WeatherManager{
-    width: 80vw;
-    height: 95vh;
+    height: 100vh;
     background-image: url("./background-image.jpg");
-    background-repeat:no-repeat;
-    margin: 2rem auto;
+    background-repeat:repeat;
     position: relative;
 }
+
+
 
 .WeatherManager-controls{
     padding-top: 2.4rem;
@@ -46,6 +46,15 @@
     grid-template-areas: 
     "Img Img Img Img Img Img Tmp Tmp Tmp Tmp Tmp Tmp";
     column-gap: 8rem;
+}
+
+.ExtraWeatherData{
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    row-gap: 2rem;
+    justify-content:space-around;
 }
 
 .temperature{
@@ -91,3 +100,16 @@
    position: relative;
    top: 4rem;
 }
+
+/* @media only screen and (max-width: 1440px) {
+    .WeatherManager{
+        width: 70vw;
+        height: 95vh;
+    }
+
+    .App{
+        margin: 0;
+        width: 70vw;
+        height: 95vh;
+    }
+} */

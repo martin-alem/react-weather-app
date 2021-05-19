@@ -1,0 +1,15 @@
+.WeatherData{
+    display: flex;
+    flex-direction: column;
+}
+
+.WeatherData .fa{
+    font-family: inherit;
+    color: #F68657;
+    font-size: 2.5rem;
+}
+
+.WeatherData .Data{
+    font-size: 2rem;
+    color: aliceblue;
+}

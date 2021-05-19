@@ -11,6 +11,7 @@ import WeatherImage from "../WeatherImage/WeatherImage";
 import Temperature from "../Temperature/Temperature";
 import Modal from "../Modal/Modal";
 import Message from "../Message/Message";
+import WeatherData from "../WeatherData/WeatherData";
 
 class WeatherManager extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class WeatherManager extends React.Component {
             openModal: false,
             locations: [],
         }
+
         this.fetchDataOnSubmit = this.fetchDataOnSubmit.bind(this);
         this.fetchWeatherDataForCurrentLocation = this.fetchWeatherDataForCurrentLocation.bind(this);
         this.persistCurrentLocation = this.persistCurrentLocation.bind(this);
@@ -31,6 +33,7 @@ class WeatherManager extends React.Component {
         this.showModal = this.showModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
+
 
     componentDidMount() {
         getWeatherDataOnPageLoad().then(response => {
@@ -42,6 +45,8 @@ class WeatherManager extends React.Component {
             this.hideShowMessage(4000, "Error loading weather data");
         });
     }
+
+
 
     fetchDataOnSubmit(cityName) {
         getWeatherDataOnSubmit(cityName).then(response => {
@@ -160,6 +165,18 @@ class WeatherManager extends React.Component {
                         <div className={this.state.doneFetching ? "weather-image" : "weather-image animate"}>
                             <WeatherImage imageSrc={imageUrl} description={this.state.weatherData.description} />
                         </div>
+                    </div>
+
+                    <div className="ExtraWeatherData">
+                        <WeatherData icon="Feels Like" data={this.state.weatherData?.feelsLike} />
+                        <WeatherData icon="Pressure" data={this.state.weatherData?.pressure} />
+                        <WeatherData icon="Wind Speed" data={this.state.weatherData?.windSpeed} />
+                        <WeatherData icon="Low Temp" data={this.state.weatherData?.minTemperature} />
+                        <WeatherData icon="High Temp" data={this.state.weatherData?.maxTemperature} />
+                        <WeatherData icon="Humidity" data={this.state.weatherData?.humidity} />
+                        <WeatherData icon="Latitude" data={this.state.weatherData?.coords?.lat} />
+                        <WeatherData icon="Longitude" data={this.state.weatherData?.coords?.lon} />
+                        <WeatherData icon="Visibility" data={this.state.weatherData?.visibility} />
                     </div>
                 </div>
             </React.Fragment>

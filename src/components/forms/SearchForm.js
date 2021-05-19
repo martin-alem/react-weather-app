@@ -17,6 +17,7 @@ class SearchForm extends React.Component {
         event.preventDefault();
         if (this.state.searchWord !== "" && !(/\s+/g.test(this.state.searchWord))) {
             this.props.getWeatherDataOnSubmit(this.state.searchWord);
+            this.setState({ searchWord: "" });
         }
     }
 
@@ -27,7 +28,7 @@ class SearchForm extends React.Component {
         return (
             <React.Fragment>
                 <form className="SearchForm" onSubmit={this.handleSubmit}>
-                    <input type="search" className="SearchForm-input" name="search" placeholder="Enter Location" value={this.state.searchWord} onChange={this.handleChange} />
+                    <input type="search" className="SearchForm-input" name="search" placeholder="Enter City Name" value={this.state.searchWord} onChange={this.handleChange} />
                     <SearchButton />
                 </form>
             </React.Fragment>
